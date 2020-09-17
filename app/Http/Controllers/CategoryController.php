@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\category;
+use App\information;
+use App\Meter;
+use App\Clases\Files;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -14,7 +19,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categorys = category::withCount('meter')->get();
+        return view('category.list', compact('categorys'));
     }
 
     /**
@@ -24,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.new');
     }
 
     /**
@@ -35,7 +41,24 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'name' => 'required|string|max:500',
+        ]);
+        // Si se eligio archivo
+        if(isset($request->file_img)){
+            $img = $request->file_img;
+            $extension = strtolower($request->file_img->getClientOriginalExtension());
+            $files = new Files;
+            // Validacion Imagen
+            $files->validatorImgFile($img, $extension)->validate();
+            $category = category::create($data);
+            $file_name = '/'. $category->id .'_' . Str::random(8) . '.' . $extension;
+            $files->uploadFile('/portfolio' . $file_name, $img);
+            $category->img_name = $file_name;
+            $category->update();
+        }
+        Session::flash('info', 'Se ha guardado la informacion con exito.');
+        return redirect()->route('category.edit', $category);
     }
 
     /**
@@ -57,7 +80,7 @@ class CategoryController extends Controller
      */
     public function edit(category $category)
     {
-        //
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -69,7 +92,26 @@ class CategoryController extends Controller
      */
     public function update(Request $request, category $category)
     {
-        //
+        //dd($request->all());
+        // validacion texto
+        $data = request()->validate([
+            'name' => 'required|string|max:500',
+        ]);
+        // Si se eligio archivo
+        if(isset($request->file_img)){
+            $img = $request->file_img;
+            $extension = strtolower($request->file_img->getClientOriginalExtension());
+            $files = new Files;
+            // Validacion Imagen
+            $files->validatorImgFile($img, $extension)->validate();
+            $file_name = '/'. $category->id .'_' . Str::random(8) . '.' . $extension;
+            $files->uploadFile('/portfolio' . $file_name, $img);
+            $files->destroyFile('/portfolio' . $category->img_name);
+            $category->img_name = $file_name;
+        }
+        $category->update($data);
+        Session::flash('info', 'Se ha guardado la informacion con exito.');
+        return redirect()->route('category.edit', $category);
     }
 
     /**
@@ -80,6 +122,51 @@ class CategoryController extends Controller
      */
     public function destroy(category $category)
     {
-        //
+        $files = new Files;
+        $files->destroyFile('/portfolio' . $category->img_name);
+        $category->delete();
+        Session::flash('info', 'Se ha eliminado con exito.');
+        return redirect()->route('category');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show_all()
+    {
+        //$productos = products::where('categoria','=',$category->id)->paginate(9);
+        //$productos = products::paginate(9);
+        //$carouseles = carousel::all();
+        $categorys = category::withCount('products')->paginate(9);
+        $informacion = [
+            'nombre' => information::where('name','nombre')->value('value'),
+            'telefono' => information::where('name','telefono')->value('value'),
+            'horario' => information::where('name','horario')->value('value'),
+            'email' => information::where('name','email')->value('value'),
+            //'direccion' => information::where('name','direccion')->value('value'),
+            //'municipio' => information::where('name','municipio')->value('value'),
+            //'estado' => information::where('name','estado')->value('value'),
+            'no_whatsapp' => information::where('name','no_whatsapp')->value('value'),
+            'facebook' => information::where('name','facebook')->value('value'),
+            'instagram' => information::where('name','instagram')->value('value'),
+            'descripcion_empresa' => information::where('name','descripcion_empresa')->value('value'),
+            'informacion_footer' => information::where('name','informacion_footer')->value('value'),
+            //'mision' => information::where('name','mision')->value('value'),
+            //'vision' => information::where('name','vision')->value('value'),
+            //'valores' => explode("°", information::where('name','valores')->value('value')),
+            //'img_mision' => information::where('name','img_mision')->value('value'),
+            //'img_vision' => information::where('name','img_vision')->value('value'),
+            //'img_valores' => information::where('name','img_valores')->value('value'),
+            'telefono_oficina' => information::where('name','telefono_oficina')->value('value'),
+        ];
+        Meter::create([
+            'tipo' => 'Categoria',
+            'products_id' => '0',
+            'category_id' => 'todos',
+            'url' => route('show_categorys'),
+        ]);
+        return view('remaq.categorys', compact('informacion','categorys'));
     }
 }

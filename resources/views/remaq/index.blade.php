@@ -106,34 +106,37 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- Brand -->
-                <a class="navbar-brand page-scroll sticky-logo" href="index.html">
+                <a class="navbar-brand page-scroll sticky-logo" href="{{route('index')}}">
                   <!-- <h1><span>REMAQ</span> de los Altos</h1> -->
                   <!-- Uncomment below if you prefer to use an image logo -->
-                  <img src="{{asset('img/logo5.png') }}"  alt="" title="">
+                  <img src="{{asset('img/logo6.png') }}" width="200px"  alt="" title="">
                 </a>
               </div>
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse main-menu bs-example-navbar-collapse-1" id="navbar-example">
                 <ul class="nav navbar-nav navbar-right">
                   <li>
-                    <div class="input-group page-scroll" style="padding-top: 17px; width: 300px;">
-                      <input type="text" class="form-control"  placeholder="Producto">
-                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Buscar</button>
-                      </span>
-                    </div>
+                    <form action="{{ route('products_route') }}" method="POST">
+                        {{csrf_field()}}
+                        <div class="input-group page-scroll" style="padding-top: 17px; width: 300px;">
+                        <input type="text" class="form-control" id="busqueda" name="busqueda"  placeholder="Producto">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Buscar</button>
+                        </span>
+                        </div>
+                    </form>
                   </li>
                   <li class="active">
-                    <a class="page-scroll" href="#home">inicio</a>
+                    <a class="page-scroll" href="#home">Inicio</a>
                   </li>
                   <li>
-                    <a class="page-scroll" href="#about">Nosotros</a>
+                    <a class="page-scroll" href="#about">Conócenos</a>
                   </li>
                   <li>
                     <a class="page-scroll" href="#portfolio">Equipos y productos</a>
                   </li>
                   <li>
-                    <a class="page-scroll" href="#contact">Contactanos</a>
+                    <a class="page-scroll" href="#contact">Contáctanos</a>
                   </li>
                 </ul>
               </div>
@@ -151,493 +154,193 @@
   <!-- Start Slider Area -->
   <div id="home" class="slider-area">
     <div class="bend niceties preview-2">
-      <div id="ensign-nivoslider" class="slides">
-        <img src="img/slider/1862021.jpeg" alt="" title="#slider-direction-1" />
-        <img src="img/slider/rastreo-maquinaria-small.jpg" alt="" title="#slider-direction-2" />
-        <img src="img/slider/maquinaria.jpg" alt="" title="#slider-direction-3" />
-      </div>
-
-      <!-- direction 1 -->
-      <div id="slider-direction-1" class="slider-direction slider-one">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="slider-content">
-                <!-- layer 1 -->
-                <div class="layer-1-1 hidden-xs wow slideInDown" data-wow-duration="2s" data-wow-delay=".2s">
-                  <h2 class="title1">Información de tu Empresa 1 </h2>
-                </div>
-                <!-- layer 2 -->
-                <div class="layer-1-2 wow slideInUp" data-wow-duration="2s" data-wow-delay=".1s">
-                  <h1 class="title2">Descripcion publicacion 1</h1>
-                </div>
-                <!-- layer 3 -->
-                <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <a class="ready-btn right-btn page-scroll" href="#services">Ver productos</a>
-                  <a class="ready-btn page-scroll" href="#about">Conocenos</a>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div id="ensign-nivoslider" class="slides">
+            @forelse ($carouseles as $carousel)
+                <img src="{{ asset('img/slider/'.$carousel->img_name) }}" alt="" title="#slider-direction-{{$carousel->id}}" />
+            @empty
+            @endforelse
         </div>
-      </div>
-
-      <!-- direction 2 -->
-      <div id="slider-direction-2" class="slider-direction slider-two">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="slider-content text-center">
-                <!-- layer 1 -->
-                <div class="layer-1-1 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <h2 class="title1">Información de tu Empresa 2 </h2>
-                </div>
-                <!-- layer 2 -->
-                <div class="layer-1-2 wow slideInUp" data-wow-duration="2s" data-wow-delay=".1s">
-                  <h1 class="title2">Descripcion publicacion 2</h1>
-                </div>
-                <!-- layer 3 -->
-                <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <a class="ready-btn right-btn page-scroll" href="#services">Ver productos</a>
-                  <a class="ready-btn page-scroll" href="#about">Conocenos</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- direction 3 -->
-      <div id="slider-direction-3" class="slider-direction slider-two">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="slider-content">
-                <!-- layer 1 -->
-                <div class="layer-1-1 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <h2 class="title1">Información de tu Empresa 3</h2>
-                </div>
-                <!-- layer 2 -->
-                <div class="layer-1-2 wow slideInUp" data-wow-duration="2s" data-wow-delay=".1s">
-                  <h1 class="title2">Descripcion publicacion 3</h1>
-                </div>
-                <!-- layer 3 -->
-                <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <a class="ready-btn right-btn page-scroll" href="#services">Ver productos</a>
-                  <a class="ready-btn page-scroll" href="#about">Conocenos</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Slider Area -->
-
-  <!-- Start About area -->
-  <div id="about" class="about-area area-padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="section-headline text-center">
-            <h2>Nosotros</h2>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <!-- single-well start-->
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <div class="well-left">
-            <div class="single-well">
-              <a href="#">
-								  <img src="img/about/1.jpeg" alt="">
-								</a>
-            </div>
-          </div>
-        </div>
-        <!-- single-well end-->
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <div class="well-middle">
-            <div class="single-well">
-              <a href="#">
-                <h4 class="sec-head">Nuestra Misión</h4>
-              </a>
-              <p>
-                Aqui va nuestra mision.... Redug Lagre dolor sit amet, consectetur adipisicing elit. Itaque quas officiis iure aspernatur sit adipisci quaerat unde at nequeRedug Lagre dolor sit amet, consectetur adipisicing elit. Itaque quas officiis iure
-              </p>
-              <ul>
-                <li>
-                  <i class="fa fa-check"></i> Interior design Package
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Building House
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Reparing of Residentail Roof
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Renovaion of Commercial Office
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Make Quality Products
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!-- End col-->
-      </div>
-      <hr>
-      <div class="row">
-        <!-- single-well end-->
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <div class="well-middle">
-            <div class="single-well">
-              <a href="#">
-                <h4 class="sec-head">Nuestra Vision</h4>
-              </a>
-              <p>
-                Aqui va nuestra Vision.... Redug Lagre dolor sit amet, consectetur adipisicing elit. Itaque quas officiis iure aspernatur sit adipisci quaerat unde at nequeRedug Lagre dolor sit amet, consectetur adipisicing elit. Itaque quas officiis iure
-              </p>
-              <ul>
-                <li>
-                  <i class="fa fa-check"></i> Interior design Package
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Building House
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Reparing of Residentail Roof
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Renovaion of Commercial Office
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Make Quality Products
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!-- single-well start-->
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <div class="well-left">
-            <div class="single-well">
-              <a href="#">
-								  <img src="img/about/2.jpg" alt="">
-								</a>
-            </div>
-          </div>
-        </div>
-        <!-- End col-->
-      </div>
-      <!-- single-well start-->
-      <hr>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <div class="well-left">
-            <div class="single-well">
-              <a href="#">
-                  <img src="img/about/3.jpg" alt="">
-                </a>
-            </div>
-          </div>
-        </div>
-        <!-- single-well end-->
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <div class="well-middle">
-            <div class="single-well">
-              <a href="#">
-                <h4 class="sec-head">Valores</h4>
-              </a>
-              <p>
-                Aqui van los valores.... Redug Lagre dolor sit amet, consectetur adipisicing elit. Itaque quas officiis iure aspernatur sit adipisci quaerat unde at nequeRedug Lagre dolor sit amet, consectetur adipisicing elit. Itaque quas officiis iure
-              </p>
-              <ul>
-                <li>
-                  <i class="fa fa-check"></i> Interior design Package
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Building House
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Reparing of Residentail Roof
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Renovaion of Commercial Office
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Make Quality Products
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!-- End col-->
-      </div>
-    </div>
-  </div>
-  <!-- End About area -->
-  <!-- Start portfolio Area -->
-  <div id="portfolio" class="portfolio-area area-padding fix">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="section-headline text-center">
-            <h2>Catalogos de productos</h2>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <!-- Start Portfolio -page -->
-        <div class="awesome-project-1 fix">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="awesome-menu ">
-              <ul class="project-menu">
-                <li>
-                  <a href="#" class="active" data-filter="*">Todo</a>
-                </li>
-                <li>
-                  <a href="#" data-filter=".maquinaria">Maquinaria</a>
-                </li>
-                <li>
-                  <a href="#" data-filter=".refacciones">Refacciones</a>
-                </li>
-                <li>
-                  <a href="#" data-filter=".renta">Renta Equipo</a>
-                </li>
-                <li>
-                  <a href="#" data-filter=".tecnologias">Tecnologias</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="awesome-project-content">
-          <!-- single-awesome-project start -->
-          <div class="col-md-4 col-sm-4 col-xs-12 maquinaria">
-            <div class="single-awesome-project">
-              <div class="awesome-img">
-                <a href="#"><img src="img/portfolio/1.jpg" alt="" /></a>
-                <div class="add-actions text-center">
-                  <div class="project-dec">
-                    <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
-                    <!--<a class="venobox" data-gall="myGallery" href="img/portfolio/1.jpg">-->
-                      <h4>Maquinaria Nueva</h4>
-                      <span>Realiza tu cotización</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single-awesome-project end -->
-          <!-- single-awesome-project start -->
-          <div class="col-md-4 col-sm-4 col-xs-12 renta maquinaria">
-            <div class="single-awesome-project">
-              <div class="awesome-img">
-                <a href="#"><img src="img/portfolio/2.jpg" alt="" /></a>
-                <div class="add-actions text-center">
-                  <div class="project-dec">
-                    <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
-                    <!--<a class="venobox" data-gall="myGallery" href="img/portfolio/2.jpg">-->
-                      <h4>Maquinaria Usada</h4>
-                      <span>Realiza tu cotización</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single-awesome-project end -->
-          <!-- single-awesome-project start -->
-          <div class="col-md-4 col-sm-4 col-xs-12 renta">
-            <div class="single-awesome-project">
-              <div class="awesome-img">
-                <a href="#"><img src="img/portfolio/3.jpg" alt="" /></a>
-                <div class="add-actions text-center">
-                  <div class="project-dec">
-                    <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
-                    <!--<a class="venobox" data-gall="myGallery" href="img/portfolio/3.jpg">-->
-                      <h4>Renta de equipo</h4>
-                      <span>Realiza tu cotización</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single-awesome-project end -->
-          <!-- single-awesome-project start -->
-          <div class="col-md-4 col-sm-4 col-xs-12 refacciones">
-            <div class="single-awesome-project">
-              <div class="awesome-img">
-                <a href="#"><img src="img/portfolio/4.jpg" alt="" /></a>
-                <div class="add-actions text-center">
-                  <div class="project-dec">
-                    <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
-                      <h4>Refacciones</h4>
-                      <span>Realiza tu cotización</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single-awesome-project end -->
-          <!-- single-awesome-project start -->
-          <div class="col-md-4 col-sm-4 col-xs-12 refacciones">
-            <div class="single-awesome-project">
-              <div class="awesome-img">
-                <a href="#"><img src="img/portfolio/5.jpg" alt="" /></a>
-                <div class="add-actions text-center text-center">
-                  <div class="project-dec">
-                    <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
-                    <!--<a class="venobox" data-gall="myGallery" href="img/portfolio/5.jpg">-->
-                      <h4>Llantas</h4>
-                      <span>Realiza tu cotización</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single-awesome-project end -->
-          <!-- single-awesome-project start -->
-            <div class="col-md-4 col-sm-4 col-xs-12 tecnologias">
-                <div class="single-awesome-project">
-                    <div class="awesome-img">
-                        <a href="#"><img src="img/portfolio/6.jpeg" alt="" /></a>
-                        <div class="add-actions text-center">
-                            <div class="project-dec">
-                                <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
-                                <!--<a class="venobox" data-gall="myGallery" href="img/portfolio/6.jpeg">-->
-                                <h4>Nuevas tecnologias</h4>
-                                <span>Realiza tu cotización</span>
-                                </a>
+        @forelse ($carouseles as $carousel)
+            <div id="slider-direction-{{$carousel->id}}" class="slider-direction slider-one">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="slider-content">
+                                <!-- layer 1 -->
+                                <div class="layer-1-1 wow slideInDown" data-wow-duration="2s" data-wow-delay=".2s">
+                                    <h2 class="title1">{{$carousel->titulo}}</h2>
+                                </div>
+                                <!-- layer 2 -->
+                                <div class="layer-1-2 wow slideInUp" data-wow-duration="2s" data-wow-delay=".1s">
+                                    <h1 class="title2">{{$carousel->descripcion}}</h1>
+                                </div>
+                                <!-- layer 3 -->
+                                <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
+                                    <a class="ready-btn right-btn page-Ftele" href="#portfolio">Ver productos</a>
+                                    <a class="ready-btn page-scroll" href="#about">Conocenos</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-          <!-- single-awesome-project end -->
-        </div>
-      </div>
+        @empty
+        @endforelse
     </div>
-  </div>
-  <!-- awesome-portfolio end -->
-  <section class="autoplay slider">
-    <div class="single-awesome-project">
-        <div class="awesome-img">
-            <a href="#"><img src="img/portfolio/6.jpeg" alt="" /></a>
-            <div class="add-actions text-center">
-                <div class="project-dec">
-                    <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
-                    <!--<a class="venobox" data-gall="myGallery" href="img/portfolio/6.jpeg">-->
-                    <h4>Nuevas tecnologias</h4>
-                    <span>Realiza tu cotización</span>
-                    </a>
+</div>
+<!-- End Slider Area -->
+
+<!-- Start About area -->
+<div id="about" class="about-area area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <h2>Conócenos</h2>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="single-awesome-project">
-        <div class="awesome-img">
-          <a href="#"><img src="img/portfolio/5.jpg" alt="" /></a>
-          <div class="add-actions text-center text-center">
-            <div class="project-dec">
-              <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
-              <!--<a class="venobox" data-gall="myGallery" href="img/portfolio/5.jpg">-->
-                <h4>Llantas</h4>
-                <span>Realiza tu cotización</span>
-              </a>
+        <div class="row">
+            <!-- single-well start-->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="well-left">
+                    <div class="single-well">
+                        <img src="{{ asset('img/about/' . $informacion['img_mision']) }}" alt="">
+                    </div>
+                </div>
             </div>
-          </div>
+            <!-- single-well end-->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="well-middle">
+                    <div class="single-well">
+                        <h3 class="sec-head">Nuestra Misión</h3>
+                        <p class="branding-text">{{ $informacion['mision'] }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- End col-->
         </div>
-      </div>
-    <div>
-        <div class="single-awesome-project">
-        <div class="awesome-img">
-            <a href="#"><img src="img/portfolio/4.jpg" alt="" /></a>
-            <div class="add-actions text-center">
-            <div class="project-dec">
-                <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
-                <h4>Refacciones</h4>
-                <span>Realiza tu cotización</span>
-                </a>
+        <hr>
+        <div class="row">
+            <!-- single-well end-->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="well-middle">
+                    <div class="single-well">
+                        <h4 class="sec-head">Nuestra Visión</h4>
+                        <p class="branding-text">{{ $informacion['vision'] }}</p>
+                    </div>
+                </div>
             </div>
+            <!-- single-well start-->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="well-left">
+                    <div class="single-well">
+                        <img src="{{ asset('img/about/' . $informacion['img_vision']) }}" alt="">
+                    </div>
+                </div>
             </div>
+            <!-- End col-->
         </div>
-        </div>
-    </div>
-    <div>
-        <div class="single-awesome-project">
-        <div class="awesome-img">
-            <a href="#"><img src="img/portfolio/3.jpg" alt="" /></a>
-            <div class="add-actions text-center">
-            <div class="project-dec">
-                <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
-                <!--<a class="venobox" data-gall="myGallery" href="img/portfolio/3.jpg">-->
-                <h4>Renta de equipo</h4>
-                <span>Realiza tu cotización</span>
-                </a>
+        <!-- single-well start-->
+        <hr>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="well-left">
+                    <div class="single-well">
+                        <img src="{{ asset('img/about/' . $informacion['img_valores']) }}" alt="">
+                    </div>
+                </div>
             </div>
+            <!-- single-well end-->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="well-middle">
+                    <div class="single-well">
+                        <h4 class="sec-head">Valores</h4>
+                        @for ($i = 0; $i < sizeof($informacion['valores']); $i++)
+                        @if ($informacion['valores'][$i] != null)
+                        <ul>
+                            <li class="branding-text">
+                                <i class="fa fa-check"></i> {{$informacion['valores'][$i]}}
+                            </li>
+                        </ul>
+                        @endif
+                        @endfor
+                    </div>
+                </div>
             </div>
-        </div>
-        </div>
-    </div>
-    <div>
-        <div class="single-awesome-project">
-        <div class="awesome-img">
-            <a href="#"><img src="img/portfolio/2.jpg" alt="" /></a>
-            <div class="add-actions text-center">
-            <div class="project-dec">
-                <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
-                <!--<a class="venobox" data-gall="myGallery" href="img/portfolio/2.jpg">-->
-                <h4>Maquinaria Usada</h4>
-                <span>Realiza tu cotización</span>
-                </a>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    <div>
-        <div class="single-awesome-project">
-        <div class="awesome-img">
-            <a href="#"><img src="img/portfolio/1.jpg" alt="" /></a>
-            <div class="add-actions text-center">
-            <div class="project-dec">
-                <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
-                <!--<a class="venobox" data-gall="myGallery" href="img/portfolio/1.jpg">-->
-                <h4>Maquinaria Nueva</h4>
-                <span>Realiza tu cotización</span>
-                </a>
-            </div>
-            </div>
-        </div>
+            <!-- End col-->
         </div>
     </div>
-    <div>
-      <img src="http://placehold.it/500x500?text=7">
+</div>
+<!-- End About area -->
+  <!-- Start portfolio Area -->
+    <div id="portfolio" class="portfolio-area fix">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="section-headline text-center">
+                        <h2>Catálogos de productos</h2>
+                    </div>
+                </div>
+            </div>
+            <section class="autoplay slider">
+                <div class="single-awesome-project">
+                    <div class="awesome-img">
+                        <a href="{{route('show_categorys')}}">
+                            <img src="{{ asset('img/portfolio/categorias.jpg') }}" alt="" />
+                        </a>
+                        <div class="add-actions text-center hidden-xs">
+                            <div class="project-dec">
+                                <a href="{{route('show_categorys')}}">
+                                    <h4>Mostrar todas</h4>
+                                    <span>las categorias</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @forelse ($categorys as $category)
+                <div class="single-awesome-project">
+                    <div class="awesome-img">
+                        @if ($category->products_count > 0)
+                        <a href="{{route('show.products_by_category', $category)}}">
+                        @else
+                        <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
+                        @endif<img src="{{ asset('img/portfolio/' . $category->img_name) }}" alt="" /></a>
+                        <div class="add-actions text-center hidden-xs">
+                            <div class="project-dec">
+                                @if ($category->products_count > 0)
+                                <a href="{{route('show.products_by_category', $category)}}">
+                                @else
+                                <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
+                                @endif
+                                <!--<a class="venobox" data-gall="myGallery" href="img/portfolio/6.jpeg">-->
+                                <h4>{{ $category->name }}</h4>
+                                @if ($category->products_count > 0)
+                                <span>Articulos relacionados</span>
+                                @else
+                                <span>Realiza tu cotización</span>
+                                @endif
+
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                @endforelse
+            </section>
+        </div>
     </div>
-    <div>
-      <img src="http://placehold.it/500x500?text=8">
-    </div>
-    <div>
-      <img src="http://placehold.it/500x500?text=9">
-    </div>
-  </section>
   <!-- Start contact Area -->
-  <div id="contact" class="contact-area">
-    <div class="contact-inner area-padding">
+  <div id="contact" class="contact-area area-padding">
+    <div class="contact-inner">
       <div class="contact-overly"></div>
       <div class="container ">
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="section-headline text-center">
-              <h2>Contactanos</h2>
+              <h2>Contáctanos</h2>
             </div>
           </div>
         </div>
@@ -648,8 +351,9 @@
               <div class="single-icon">
                 <i class="fa fa-mobile"></i>
                 <p>
-                  Telefono: {{ $informacion['telefono']}}<br>
-                  <span>{{ $informacion['horario']}}</span>
+                    <h4>Telefonos</h4>
+                    <span>Celular: {{ $informacion['telefono']}}</span><br>
+                    <span>Oficina: {{ $informacion['telefono_oficina']}}</span>
                 </p>
               </div>
             </div>
@@ -660,8 +364,9 @@
               <div class="single-icon">
                 <i class="fa fa-envelope-o"></i>
                 <p>
-                    Email: {{ $informacion['email']}}<br>
-                  <span>Web: www.remaqdelosaltos.com</span>
+                    <h4>Correo y horarios</h4>
+                    <span>Email: {{ $informacion['email']}}</span><br>
+                    <span>Horario: {{ $informacion['horario']}}</span>
                 </p>
               </div>
             </div>
@@ -672,82 +377,104 @@
               <div class="single-icon">
                 <i class="fa fa-map-marker"></i>
                 <p>
-                  Dirección: {{ $informacion['direccion']}}<br>
-                  <span>{{ $informacion['municipio']}}, {{ $informacion['estado']}}</span>
+                    <h4>Dirección</h4>
+                    <span>{{ $informacion['direccion']}}</span><br>
+                    <span>{{ $informacion['municipio']}}, {{ $informacion['estado']}}</span>
                 </p>
               </div>
             </div>
           </div>
         </div>
         <div class="row text-center">
-          <h4>Si prefieres envianos mensaje directo a nuestras redes sociales.</h4>
+          <h4>Si prefieres envíanos mensaje directo a nuestras redes sociales.</h4>
         </div>
         <div class="row">
           <div class="col-md-1 col-md-offset-4 col-xs-4 text-center">
-            <a href="https://api.whatsapp.com/send?phone=+521{{ $informacion['no_whatsapp']}}">
+            <a href="https://api.whatsapp.com/send?phone=+521{{ $informacion['no_whatsapp']}}" target=”_blank”>
               <img src="img/whatsapp.png" alt="Envianos un WhatsApp" width="50" height="50">
             </a>
           </div>
           <div class="col-md-1 col-xs-4 text-center">
-            <a href="{{ $informacion['facebook']}}">
+            <a href="{{ $informacion['facebook']}}" target=”_blank”>
               <img src="img/facebook.png" alt="Envianos un mensaje por Facebook" width="50" height="50">
             </a>
           </div>
           <div class="col-md-1 col-xs-4 text-center">
-            <a href="{{ $informacion['instagram']}}">
+            <a href="{{ $informacion['instagram']}}" target=”_blank”>
               <img src="img/instagram.png" alt="Envianos un mensaje por instagram" width="50" height="50">
             </a>
           </div>
         </div>
         <br>
         <div class="row text-center">
-          <h4>Tambien puedes llenar el siguiente formulario.</h4>
+          <h4>También puedes llenar el siguiente formulario.</h4>
         </div>
         <div class="row">
           <!-- Start Google Map -->
           <div class="col-md-6 col-sm-6 col-xs-12">
             <!-- Start Map -->
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d659.2827716508166!2d-102.75248852068736!3d20.81285858769398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8429262eed4a1019%3A0x28e204d415a8203!2sBlvd.%20Anacleto%20Glez%20Flores%20Nte.%20180%2C%20San%20Miguel%2C%2047660%20Tepatitl%C3%A1n%20de%20Morelos%2C%20Jal.!5e0!3m2!1ses-419!2smx!4v1596769075867!5m2!1ses-419!2smx" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d659.2827716508166!2d-102.75248852068736!3d20.81285858769398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8429262eed4a1019%3A0x28e204d415a8203!2sBlvd.%20Anacleto%20Glez%20Flores%20Nte.%20180%2C%20San%20Miguel%2C%2047660%20Tepatitl%C3%A1n%20de%20Morelos%2C%20Jal.!5e0!3m2!1ses-419!2smx!4v1596769075867!5m2!1ses-419!2smx" width="100%" height="480" frameborder="0" style="border:0" allowfullscreen></iframe>
             <!-- End Map -->
           </div>
           <!-- End Google Map -->
           <!-- Start  contact -->
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="form contact-form">
-              <div id="sendmessage">Tu mensaje se ha enviado, ¡Gracias!</div>
-              <div id="errormessage"></div>
-              <form action="" method="post" role="form" class="contactForm">
-                <div class="form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Tu nombre" data-rule="minlen:4" data-msg="Por favor, escribe tu nombre completo." />
-                  <div class="validation"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form contact-form">
+                    <form action="{{ route('contact.mail') }}" method="post" role="form" class="contactForm">
+                        {{csrf_field()}}
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control" id="name"
+                                placeholder="Tu nombre" required/>
+                            @if ($errors->has('name'))
+                                <small class="text-center text-danger">{{ $errors->first('name') }}</small>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="telefono"
+                                id="telefono" placeholder="Teléfono" minlength="10" required/>
+                            @if ($errors->has('telefono'))
+                                <small class="text-center text-danger">{{ $errors->first('telefono') }}</small>
+                            @endif
+                        </div>
+                            <div class="form-group">
+                            <input type="email" class="form-control" name="email" id="email"
+                                placeholder="Correo electrónico" required/>
+                            @if ($errors->has('email'))
+                                <small class="text-center text-danger">{{ $errors->first('email') }}</small>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="no_serie" id="no_serie"
+                                placeholder="Número de Serie de la máquina" required/>
+                            @if ($errors->has('no_serie'))
+                                <small class="text-center text-danger">{{ $errors->first('no_serie') }}</small>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="mod_maquina"
+                                id="mod_maquina" placeholder="Modelo de la maquina" required/>
+                            @if ($errors->has('mod_maquina'))
+                                <small class="text-center text-danger">{{ $errors->first('mod_maquina') }}</small>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="no_pieza"
+                                id="no_pieza" placeholder="Numero de pieza (Opcional)" />
+                            @if ($errors->has('no_pieza'))
+                                <small class="text-center text-danger">{{ $errors->first('no_pieza') }}</small>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="message" name="message"
+                                rows="5" required></textarea>
+                            @if ($errors->has('message'))
+                                <small class="text-center text-danger">{{ $errors->first('message') }}</small>
+                            @endif
+                        </div>
+                        <div class="text-center"><button type="submit">Enviar solicitud</button></div>
+                    </form>
                 </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Correo electronico" data-rule="email" data-msg="Por favor, ingresa un correo valido." />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="no_serie" id="no_serie" placeholder="Numero de Serie de la maquina" data-rule="minlen:4" data-msg="Por favor, ingresa un numero de serie valido." />
-                    <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="mod_maquina" id="mod_maquina" placeholder="Modelo de la maquina" data-rule="minlen:4" data-msg="Por favor ingresa el modelo de tu maquina." />
-                    <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="no_pieza" id="no_pieza" placeholder="Numero de pieza (Opcional)" />
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Telefono" data-rule="minlen:4" data-msg="Por favor ingresa tu numero de telefono." />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Describe tu mensaje, ¡Estamos para ayudarte!" placeholder="Describe tu mensaje"></textarea>
-                  <div class="validation"></div>
-                </div>
-                <div class="text-center"><button type="submit">Enviar solicitud</button></div>
-              </form>
             </div>
-          </div>
           <!-- End Left contact -->
         </div>
       </div>
@@ -770,13 +497,13 @@
                 <div class="footer-icons">
                   <ul>
                     <li>
-                      <a href="{{ $informacion['facebook']}}"><i class="fa fa-facebook"></i></a>
+                      <a href="{{ $informacion['facebook']}}" target=”_blank”><i class="fa fa-facebook"></i></a>
                     </li>
                     <li>
-                      <a href="{{ $informacion['instagram']}}"><i class="fa fa-instagram"></i></a>
+                      <a href="{{ $informacion['instagram']}}" target=”_blank”><i class="fa fa-instagram"></i></a>
                     </li>
                     <li>
-                      <a href="https://api.whatsapp.com/send?phone=+521{{ $informacion['no_whatsapp']}}"><i class="fa fa-whatsapp"></i></a>
+                      <a href="https://api.whatsapp.com/send?phone=+521{{ $informacion['no_whatsapp']}}" target=”_blank”><i class="fa fa-whatsapp"></i></a>
                     </li>
                   </ul>
                 </div>
@@ -803,12 +530,20 @@
               <div class="footer-head">
                 <h4>Catalogos</h4>
                 <div class="flicker-img">
-                  <a href="#"><img src="img/portfolio/1.jpg" alt=""></a>
-                  <a href="#"><img src="img/portfolio/2.jpg" alt=""></a>
-                  <a href="#"><img src="img/portfolio/3.jpg" alt=""></a>
-                  <a href="#"><img src="img/portfolio/4.jpg" alt=""></a>
-                  <a href="#"><img src="img/portfolio/5.jpg" alt=""></a>
-                  <a href="#"><img src="img/portfolio/6.jpeg" alt=""></a>
+                    <a href="{{route('show_categorys')}}">
+                        <img src="{{ asset('img/portfolio/categorias.jpg') }}" alt="Todas las categorias" />
+                    </a>
+                    @forelse ($categorys as $category)
+                        @if ($loop->index < 5)
+                            @if ($category->products_count > 0)
+                            <a href="{{route('show.products_by_category', $category)}}">
+                            @else
+                            <a href="#contactanos" data-toggle="modal" data-target="#contactanos">
+                            @endif
+                            <img src="{{ asset('img/portfolio/' . $category->img_name) }}" alt="{{$category->name}}"></a>
+                        @endif
+                    @empty
+                    @endforelse
                 </div>
               </div>
             </div>
@@ -826,7 +561,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h5 class="modal-title">¡Contactanos! Cuanto antes tendremos tu cotización</h5>
+          <h5 class="modal-title">¡Contáctanos! Cuanto antes tendremos tu cotización</h5>
         </div>
         <div class="modal-body">
           <div class="container-fluid">
@@ -834,55 +569,72 @@
             <div class="row">
               <div class="col-md-4 col-md-offset-2 col-xs-6">
                 <a href="https://api.whatsapp.com/send?phone=+521{{ $informacion['no_whatsapp']}}"
-                  class="btn btn-success btn-xs" target=”_blank”>Contactanos por WhatsApp</a>
+                  class="btn btn-success btn-xs" target=”_blank”>Contáctanos por WhatsApp</a>
               </div>
               <div class="col-md-4 col-xs-6">
                 <a href="{{ $informacion['facebook']}}" target=”_blank”
-                  class="btn btn-primary btn-xs">Contactanos por Facebook</a>
+                  class="btn btn-primary btn-xs">Contáctanos por Facebook</a>
               </div>
             </div>
             <div class="col-xs-12 text-center">Si lo prefieres llena el siguiente formulario</div>
 
             <!-- Formulario de contacto -->
             <div class="form contact-form">
-              <div id="sendmessage">Tu mensaje se ha enviado, ¡Gracias!</div>
-              <div id="errormessage"></div>
-              <form action="" method="post" role="form" class="contactForm">
-                <div class="form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Tu nombre" data-rule="minlen:4" data-msg="Por favor, escribe tu nombre completo." />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Correo electronico" data-rule="email" data-msg="Por favor, ingresa un correo valido." />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="no_serie" id="no_serie" placeholder="Numero de Serie de la maquina" data-rule="minlen:4" data-msg="Por favor, ingresa un numero de serie valido." />
-                    <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="mod_maquina" id="mod_maquina" placeholder="Modelo de la maquina" data-rule="minlen:4" data-msg="Por favor ingresa el modelo de tu maquina." />
-                    <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="no_pieza" id="no_pieza" placeholder="Numero de pieza (Opcional)" />
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Telefono" data-rule="minlen:4" data-msg="Por favor ingresa tu numero de telefono." />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Describe tu mensaje, ¡Estamos para ayudarte!" placeholder="Describe tu mensaje"></textarea>
-                  <div class="validation"></div>
-                </div>
-              </form>
+                <form action="{{ route('contact.mail') }}" method="post" role="form" class="contactForm">
+                    {{csrf_field()}}
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" id="name"
+                            placeholder="Tu nombre" required/>
+                        @if ($errors->has('name'))
+                            <small class="text-center text-danger">{{ $errors->first('name') }}</small>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="telefono"
+                            id="telefono" placeholder="Telefono" minlength="10" required/>
+                        @if ($errors->has('telefono'))
+                            <small class="text-center text-danger">{{ $errors->first('telefono') }}</small>
+                        @endif
+                    </div>
+                        <div class="form-group">
+                        <input type="email" class="form-control" name="email" id="email"
+                            placeholder="Correo electronico" required/>
+                        @if ($errors->has('email'))
+                            <small class="text-center text-danger">{{ $errors->first('email') }}</small>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="no_serie" id="no_serie"
+                            placeholder="Numero de Serie de la maquina" required/>
+                        @if ($errors->has('no_serie'))
+                            <small class="text-center text-danger">{{ $errors->first('no_serie') }}</small>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="mod_maquina"
+                            id="mod_maquina" placeholder="Modelo de la maquina" required/>
+                        @if ($errors->has('mod_maquina'))
+                            <small class="text-center text-danger">{{ $errors->first('mod_maquina') }}</small>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="no_pieza"
+                            id="no_pieza" placeholder="Numero de pieza (Opcional)" />
+                        @if ($errors->has('no_pieza'))
+                            <small class="text-center text-danger">{{ $errors->first('no_pieza') }}</small>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="message" name="message"
+                            rows="5" required></textarea>
+                        @if ($errors->has('message'))
+                            <small class="text-center text-danger">{{ $errors->first('message') }}</small>
+                        @endif
+                    </div>
+                    <div class="text-center"><button type="submit">Enviar solicitud</button></div>
+                </form>
             </div>
           </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success">Enviar</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
@@ -927,5 +679,6 @@
         });
     });
 </script>
+@include('messages.info_alert')
 </body>
 </html>

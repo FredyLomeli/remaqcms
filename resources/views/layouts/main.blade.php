@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  @yield('styles')
 </head>
 <body class="hold-transition sidebar-mini layout-boxed">
 <!-- Site wrapper -->
@@ -29,9 +30,10 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ route('adminIndex') }}" class="nav-link">Inicio</a>
       </li>
+      @yield('links')
     </ul>
 
-    <!-- SEARCH FORM -->
+    <!-- SEARCH FORM
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search">
@@ -41,7 +43,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form>-->
   </nav>
   <!-- /.navbar -->
 
@@ -79,25 +81,31 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('mision') }}" class="nav-link">
+                <a href="{{ route('save.branding', ['branding' => 'mision']) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Mision</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('vision') }}" class="nav-link">
+                <a href="{{ route('save.branding', ['branding' => 'vision']) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Vision</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('valores') }}" class="nav-link">
+                <a href="{{ route('save.branding', ['branding' => 'valores']) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Valores</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('categorias') }}" class="nav-link">
+                <a href="{{ route('carrusel') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Carrusel</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('category') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Categorias</p>
                 </a>
@@ -106,6 +114,12 @@
                 <a href="{{ route('productos') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Productos</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('registrar') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Registrar usuario</p>
                 </a>
             </li>
             <li class="nav-item">
@@ -169,5 +183,6 @@
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('js/adminlte.min.js') }}"></script>
+@yield('script')
 </body>
 </html>

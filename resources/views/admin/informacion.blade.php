@@ -24,13 +24,24 @@
                                 <small class="text-center text-danger">{{ $errors->first('nombre') }}</small>
                             @endif
                         </div>
-                        <label for="telefono" class="col-sm-2 col-form-label">Telefono:</label>
+                        <label for="telefono" class="col-sm-2 col-form-label">Telefono Celular:</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" name="telefono"
                                 value="{{ old('telefono', $informacion['telefono']) }}"
                                 id="telefono" placeholder="Telefono" required>
                             @if ($errors->has('telefono'))
                                 <small class="text-center text-danger">{{ $errors->first('telefono') }}</small>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="telefono_oficina" class="col-sm-2 col-form-label">Telefono Oficina:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="telefono_oficina"
+                                value="{{ old('telefono_oficina', $informacion['telefono_oficina']) }}"
+                                id="telefono_oficina" placeholder="telefono de oficina" required>
+                            @if ($errors->has('telefono_oficina'))
+                                <small class="text-center text-danger">{{ $errors->first('telefono_oficina') }}</small>
                             @endif
                         </div>
                     </div>

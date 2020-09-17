@@ -212,7 +212,7 @@ div#preloader {
 }
 
 .area-padding {
-  padding: 70px 0px 80px;
+  padding: 30px 0px 40px;
 }
 
 .area-padding-2 {
@@ -245,13 +245,17 @@ div#preloader {
 
 .sec-head {
   display: inline-block;
-  font-size: 17px;
+  font-size: 24px;
   font-weight: 600;
   margin-bottom: 0;
   padding: 0 0 10px;
   text-transform: uppercase;
   transition: all 0.4s ease 0s;
 }
+
+.branding-text {
+    font-size: 20px;
+  }
 
 /*--------------------------------*/
 
@@ -1068,6 +1072,10 @@ div#preloader {
  10.Portfolio Area Css
 ----------------------------------------*/
 
+.portfolio-area {
+    background-color: #f9f9f9;
+  }
+
 .pst-content {
   padding-left: 10px;
 }
@@ -1625,6 +1633,7 @@ div#preloader {
 /*--------------------------------*/
 
 .contact-area {
+  background-color: #f9f9f9;
   height: auto;
   width: 100%;
 }
@@ -1714,10 +1723,12 @@ div#preloader {
   font-size: 24px;
   width: 50px;
   height: 50px;
-  border: 1px solid #444;
+  border: 1px solid rgb(0, 0, 0);
   line-height: 46px;
   border-radius: 50%;
   margin-bottom: 20px;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
 }
 
 .single-icon p {
@@ -2351,3 +2362,100 @@ span.email-notes {
 /*----------------------------------------
  .End CSS
 ----------------------------------------*/
+
+
+/*  GRID OF THREE   ============================================================================= */
+.grid_1_of_3{
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+.grid_1_of_3:first-child {
+	margin-left: 0;
+}
+.images_1_of_3 {
+	width: 32.2%;
+}
+.images_1_of_3  img {
+	max-width:100%;
+	display:block;
+}
+.images_1_of_3  h3{
+	color:#C94848;
+	margin-top:0.4em;
+	margin-bottom:0.2em;
+	font-size:1.2em;
+	font-weight : normal;
+	letter-spacing: -1px;
+}
+
+/*  GO FULL WIDTH AT LESS THAN 640 PIXELS */
+@media only screen and (max-width: 640px) {
+
+	.wrap{
+		width:95%;
+	}
+	.grid_1_of_3{
+		margin: 2% 0 2% 0%;
+	}
+	.span_2_of_3 h3 {
+		margin-top: 10px;
+	}
+	.images_1_of_3 {
+		width:33.3%;
+		padding:0%;
+	}
+}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {
+
+	.wrap{
+		width:95%;
+	}
+	.grid_1_of_3{
+		margin: 2% 0 2% 0%;
+	}
+	.images_1_of_3 {
+		width:92%;
+		padding:0%;
+	}
+}
+
+.grid_1{
+	border: 1px solid #D9D9D9;
+}
+.grid_1 img{
+	display:block;
+}
+.grid_desc {
+    padding: 1% 7% 5% 7%;
+}
+
+.box-title{
+	background: #D54F30;
+	border-bottom: 1px solid #D54F30;
+	padding: 12px 17px 10px 15px;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 21px;
+	color: #373737;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	margin-bottom: 4%;
+}
+.box-title h1 a{
+	color:#fff;
+}
+p.title {
+	font-size: 13px;
+	color:#D54F30;
+	line-height: 1.6em;
+	margin-top: 9%;
+}
+p.title1 {
+	font-size: 13px;
+	color:#333;
+	line-height: 1.8em;
+}

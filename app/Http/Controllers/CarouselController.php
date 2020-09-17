@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\carousel;
+use App\Clases\Files;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CarouselController extends Controller
 {
@@ -14,7 +17,8 @@ class CarouselController extends Controller
      */
     public function index()
     {
-        //
+        $carouseles = carousel::all();
+        return view('carusel.list', compact('carouseles'));
     }
 
     /**
@@ -24,7 +28,7 @@ class CarouselController extends Controller
      */
     public function create()
     {
-        //
+        return view('carusel.new');
     }
 
     /**
@@ -35,7 +39,25 @@ class CarouselController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'titulo' => 'required|string|max:500',
+            'descripcion' => 'required|string|max:500',
+        ]);
+        // Si se eligio archivo
+        if(isset($request->file_img)){
+            $img = $request->file_img;
+            $extension = strtolower($request->file_img->getClientOriginalExtension());
+            $files = new Files;
+            // Validacion Imagen
+            $files->validatorImgFile($img, $extension)->validate();
+            $carousel = carousel::create($data);
+            $file_name = '/'. $carousel->id .'_' . Str::random(8) . '.' . $extension;
+            $files->uploadFile('/slider' . $file_name, $img);
+            $carousel->img_name = $file_name;
+            $carousel->update();
+        }
+        Session::flash('info', 'Se ha guardado la informacion con exito.');
+        return redirect()->route('carrusel.edit', $carousel);
     }
 
     /**
@@ -57,7 +79,7 @@ class CarouselController extends Controller
      */
     public function edit(carousel $carousel)
     {
-        //
+        return view('carusel.edit', compact('carousel'));
     }
 
     /**
@@ -69,7 +91,27 @@ class CarouselController extends Controller
      */
     public function update(Request $request, carousel $carousel)
     {
-        //
+        //dd($request->all());
+        // validacion texto
+        $data = request()->validate([
+            'titulo' => 'required|string|max:500',
+            'descripcion' => 'required|string|max:500',
+        ]);
+        // Si se eligio archivo
+        if(isset($request->file_img)){
+            $img = $request->file_img;
+            $extension = strtolower($request->file_img->getClientOriginalExtension());
+            $files = new Files;
+            // Validacion Imagen
+            $files->validatorImgFile($img, $extension)->validate();
+            $file_name = '/'. $carousel->id .'_' . Str::random(8) . '.' . $extension;
+            $files->uploadFile('/slider' . $file_name, $img);
+            $files->destroyFile('/slider' . $carousel->img_name);
+            $carousel->img_name = $file_name;
+        }
+        $carousel->update($data);
+        Session::flash('info', 'Se ha guardado la informacion con exito.');
+        return redirect()->route('carrusel.edit', $carousel);
     }
 
     /**
@@ -80,6 +122,10 @@ class CarouselController extends Controller
      */
     public function destroy(carousel $carousel)
     {
-        //
+        $files = new Files;
+        $files->destroyFile('/slider' . $carousel->img_name);
+        $carousel->delete();
+        Session::flash('info', 'Se ha eliminado con exito.');
+        return redirect()->route('carrusel');
     }
 }

@@ -65,6 +65,16 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'imgperfil' => [
+            'driver' => 'local',
+            'root' => public_path().'/img',
+        ],
+
+        'imgserverperfil' => [
+            'driver' => 'local',
+            'root' => public_path().'/../../public_html/img',
+        ],
+
     ],
 
     /*

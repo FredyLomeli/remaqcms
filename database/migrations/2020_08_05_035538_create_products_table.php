@@ -17,7 +17,8 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('descripcion');
-            $table->string('img_prod');
+            $table->integer('categoria')->nullable();
+            $table->string('img_name')->nullable();
             $table->timestamps();
         });
     }

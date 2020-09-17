@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class carousel extends Model
 {
     //
+    protected $fillable = ['titulo', 'descripcion', 'img_name'];
 }
