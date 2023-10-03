@@ -5,19 +5,18 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class ContactForm extends Mailable
 {
     use Queueable, SerializesModels;
-    /**
-     * @var array
-     */
+
     public $data;
+
     /**
      * Create a new message instance.
-     *
-     * @return void
      */
     public function __construct($data)
     {
@@ -25,13 +24,32 @@ class ContactForm extends Mailable
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message envelope.
      */
-    public function build()
+    public function envelope(): Envelope
     {
-        return $this->markdown('mail.contact')
-            ->subject('Solicitud via REMAQ de los Altos.com');
+        return new Envelope(
+            subject: 'Solicitud via REMAQ de los Altos.com',
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'mail.contact',
+        );
+    }
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
+    public function attachments(): array
+    {
+        return [];
     }
 }

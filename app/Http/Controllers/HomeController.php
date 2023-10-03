@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\information;
-use App\carousel;
-use App\category;
-use App\Meter;
+use App\Models\information;
+use App\Models\carousel;
+use App\Models\category;
+use App\Models\Meter;
 use App\Mail\ContactForm;
-use App\products;
+use App\Models\products;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
@@ -30,7 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $carouseles = carousel::all();
+        $carouseles = carousel::latest('id')->get();
         $categorys = category::withCount('products')->get();
         $informacion = [
             'nombre' => information::where('name','nombre')->value('value'),

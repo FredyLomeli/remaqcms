@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\information;
+use App\Models\information;
 use App\Clases\Files;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;

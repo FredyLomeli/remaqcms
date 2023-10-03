@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\category;
-use App\information;
-use App\Meter;
+use App\Models\category;
+use App\Models\information;
+use App\Models\Meter;
 use App\Clases\Files;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;

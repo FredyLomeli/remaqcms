@@ -1,12 +1,23 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\information;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(information::class, function (Faker $faker) {
-    return [
-        //
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\information>
+ */
+class InformationFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            //
+        ];
+    }
+}

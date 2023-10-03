@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\carousel;
+use App\Models\carousel;
 use App\Clases\Files;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
